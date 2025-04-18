@@ -1,16 +1,19 @@
 import { test, expect } from '@playwright/test';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 test('Test 1: Verify login with valid credentials', async ({ page }) => {
-await page.goto('https://practicesoftwaretesting.com/auth/login');
+await page.goto('/auth/login');
 
-await page.getByPlaceholder('Your email').fill('customer@practicesoftwaretesting.com');
-await page.getByPlaceholder('Your password').fill('welcome01');
-
-
-await page.locator('[data-test="login-submit"]').click();
+await page.getByPlaceholder('Your email').fill(process.env.USER_EMAIL as string);
+await page.getByPlaceholder('Your password').fill(process.env.USER_PASSWORD as string);
 
 
-await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
+await page.getByTestId('login-submit').click();
+
+
+await expect(page).toHaveURL('/account');
 
 
 await expect(page.locator('[data-test="page-title"]')).toBeVisible();
