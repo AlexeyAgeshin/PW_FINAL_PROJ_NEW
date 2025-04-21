@@ -16,9 +16,9 @@ await page.getByTestId('login-submit').click();
 await expect(page).toHaveURL('/account');
 
 
-await expect(page.locator('[data-test="page-title"]')).toBeVisible();
-await expect(page.locator('[data-test="page-title"]')).toHaveText('My account');
+await expect(page.getByTestId('page-title')).toBeVisible();
+await expect(page.getByTestId('page-title')).toHaveText('My account');
 
-await expect(page.locator('[data-test="nav-menu"]')).toBeVisible();
-await expect(page.locator('[data-test="nav-menu"]')).toContainText('Jane Doe');
+await expect(page.getByTestId('nav-menu')).toBeVisible();
+await expect(page.getByTestId('nav-menu')).toContainText('Jane Doe');
 });
